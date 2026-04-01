@@ -8,6 +8,8 @@ import time
 from datetime import datetime, timezone
 from collections import defaultdict
 import aiohttp
+import os
+from dotenv import load_dotenv
 
 # ══════════════════════════════════════════════════════════════════
 #  ⚙️  CONFIGURACIÓN  —  solo edita esta sección

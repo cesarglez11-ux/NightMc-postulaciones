@@ -29,9 +29,9 @@ ID_LOG_MOD         = 1487620834398048306
 CANAL_BIENVENIDA   = 1487557353573322882
 TICKET_CATEGORY    = "🎫 TICKETS NIGHTMC"
 
-MC_HOST              = "tu.servidor.net"
+MC_HOST              = "nightmc.me"
 MC_PORT              = 25565
-MC_STATUS_CHANNEL_ID = 0   # pon el ID del canal aquí, o usa /mcstatus_setup
+MC_STATUS_CHANNEL_ID = 1487544239050068163   # pon el ID del canal aquí, o usa /mcstatus_setup
 
 AUTOMOD_ENABLED = True
 SPAM_THRESHOLD  = 5

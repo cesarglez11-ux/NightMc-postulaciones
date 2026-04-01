@@ -488,43 +488,6 @@ async def sl_panel_roles(interaction: discord.Interaction):
     await interaction.channel.send(embed=embed, view=RolePanel())
     await interaction.response.send_message("✅ Panel enviado.", ephemeral=True)
 
-@tree.command(name="mcstatus", description="Ver el estado del servidor MC ahora")
-async def sl_mcstatus(interaction: discord.Interaction):
-    await interaction.response.defer(ephemeral=True)
-    await interaction.followup.send(embed=await build_mc_embed(), ephemeral=True)
-
-@tree.command(name="mcstatus_setup", description="Configura el canal de estado del MC")
-@discord.app_commands.describe(canal="Canal donde se publicará el estado")
-@discord.app_commands.checks.has_permissions(administrator=True)
-async def sl_mcstatus_setup(interaction: discord.Interaction, canal: discord.TextChannel):
-    global mc_status_channel_id, mc_status_message_id
-    mc_status_channel_id = canal.id
-    mc_status_message_id = None
-    await interaction.response.send_message(f"✅ Estado del MC en {canal.mention} cada 2 minutos.", ephemeral=True)
-    await update_mc_status(interaction.guild)
-
-@tree.command(name="lockdown", description="Activar o desactivar el lockdown")
-@discord.app_commands.describe(accion="'on' para activar, 'off' para desactivar")
-@discord.app_commands.checks.has_permissions(administrator=True)
-async def sl_lockdown(interaction: discord.Interaction, accion: str):
-    global lockdown_active
-    guild = interaction.guild
-    if accion.lower() == "on":
-        lockdown_active = True
-        for ch in guild.text_channels:
-            try:
-                await ch.set_permissions(guild.default_role, send_messages=False, reason="Lockdown manual")
-            except Exception:
-                pass
-        embed = discord.Embed(title="🔒  Lockdown Activado", description="Canales bloqueados.", color=C_RED)
-        footer(embed)
-        await interaction.response.send_message(embed=embed)
-    elif accion.lower() == "off":
-        await deactivate_lockdown(guild)
-        await interaction.response.send_message("✅ Lockdown desactivado.", ephemeral=True)
-    else:
-        await interaction.response.send_message("❌ Usa `on` o `off`.", ephemeral=True)
-
 @tree.command(name="warn", description="Advertir a un usuario")
 @discord.app_commands.describe(usuario="Usuario", razon="Motivo")
 @discord.app_commands.checks.has_permissions(manage_messages=True)

@@ -12,7 +12,8 @@ import aiohttp
 # ══════════════════════════════════════════════════════════════════
 #  ⚙️  CONFIGURACIÓN  —  solo edita esta sección
 # ══════════════════════════════════════════════════════════════════
-TOKEN = "PON_TU_TOKEN_AQUÍ"
+load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
 
 ID_ROL_GESTION    = 1487582913200394260
 ID_ROL_PREMIUM    = 1487595630888226976
